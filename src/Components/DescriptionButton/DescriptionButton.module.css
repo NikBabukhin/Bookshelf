@@ -1,0 +1,45 @@
+.button {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    margin: 0;
+    transition-duration: 0.4s;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button:hover p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.button.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)
+}
+
+.button.active p {
+    transform: rotate(270deg) scale(1, 2);
+}
+
+span {
+    font-size: 15px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+p {
+    transition-duration: 0.2s;
+    font-size: 15px;
+    margin: 0 25px;
+    transform: scale(2, 1) rotate(90deg);
+}
+

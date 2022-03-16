@@ -1,6 +1,7 @@
 .book__section {
     display: flex;
     width: 500px;
-    height: 500px;
     background-color: #61dafb;
+    justify-content: space-between;
+    padding: 10px 15px;
 }
