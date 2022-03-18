@@ -4,4 +4,6 @@
     background-color: #61dafb;
     justify-content: space-between;
     padding: 10px 15px;
+    margin: 20px;
+    flex-wrap:wrap;
 }

@@ -1,0 +1,16 @@
+.description__wrapper {
+    padding: 0;
+}
+
+.description__wrapper span{
+    height:0;
+    display: none;
+}
+.description__wrapper.active {
+    padding: 15px;
+}
+.description__wrapper.active span{
+    height: 100%;
+    width: 100%;
+    display: block;
+}
