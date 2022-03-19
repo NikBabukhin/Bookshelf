@@ -3,6 +3,7 @@ import './App.css';
 import {BookSection} from "./Components/BookSection/BookSection";
 import {v1} from 'uuid'
 import {Popup} from "./Components/Popup/Popup";
+import {log} from "util";
 
 const imgSrc = "https://images-na.ssl-images-amazon.com/images/I/41xShlnTZTL._SX376_BO1,204,203,200_.jpg";
 const descriptionBook = "Some simple text for test, not more";
@@ -43,7 +44,9 @@ const bookData = [
 ]
 
 function App() {
-    let [booksData, setBooksData] = useState(bookData)
+
+    const [isPopupOpened, setIsPopupOpened] = useState(false);
+    const [booksData, setBooksData] = useState(bookData)
     let filteredBooks = booksData;
 
     const openDescriptionCallBack = (id: string) => {
@@ -55,25 +58,36 @@ function App() {
         setBooksData([...booksData])
     }
 
-    const deleteBookSectionCallBack=(id: string) => {
+    const deleteBookSectionCallBack = (id: string) => {
         filteredBooks = booksData.filter(element => element.id !== id);
         setBooksData(filteredBooks);
     }
 
+    const isPopupOpenCallBack = () => {
+        setIsPopupOpened(!isPopupOpened);
+    }
+
+    const onClickMainHandler=(event:any)=> {
+        if (event.target.className.includes('closedPopup')) {
+            setIsPopupOpened(false);
+        }
+    }
+
 
     return (
-        <div className={'App'}>
+        <div className={'App'} onClick={onClickMainHandler}>
             <h1 className={'Head'}>Welcome to the
-                <span className={'Head__span'}>bookshelf</span>
+                <span className={'Head__span'}> bookshelf</span>
             </h1>
+            <button onClick={isPopupOpenCallBack}>Add new book</button>
             {filteredBooks.map(el => <BookSection
                 bookData={el}
                 bookImage={el.imageSrc}
                 key={el.id}
                 openDescriptionCallBack={() => openDescriptionCallBack(el.id)}
-                deleteBookSection={()=>deleteBookSectionCallBack(el.id)}
+                deleteBookSection={() => deleteBookSectionCallBack(el.id)}
             />)}
-        <Popup/>
+            <Popup isPopupOpen={isPopupOpenCallBack} isOpen={isPopupOpened}/>
         </div>
     );
 }

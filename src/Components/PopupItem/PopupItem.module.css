@@ -1,0 +1,22 @@
+.popup__item {
+    padding: 30px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup__item span {
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.popup__input {
+    width: 60%;
+    font-size: 15px;
+    padding: 5px 0;
+}
+
+.popup__input::placeholder {
+    font-size: 15px;
+    font-style: italic;
+    color:rgba(0,0,0,0.7)
+}
