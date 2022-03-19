@@ -8,15 +8,28 @@ type SpecialTypeForProps = {
     bookData: BookDataType,
     bookImage: string,
     openDescriptionCallBack: ()=>void
+    deleteBookSection: ()=>void
 }
 
 export const BookSection = (props: SpecialTypeForProps) => {
 
+    const deleteOnClickHandler =()=> {
+        props.deleteBookSection();
+    }
+
     return (
         <div className={s.book__section}>
             <BookImg imageSrc={props.bookImage}/>
-            <BookInfo bookData={props.bookData} openDescriptionCallBack={props.openDescriptionCallBack}/>
-            <DescriptionBlock description={props.bookData.description} isOpened={props.bookData.isOpened} idBlocks={props.bookData.id}/>
+            <BookInfo bookData={props.bookData}
+                      openDescriptionCallBack={props.openDescriptionCallBack}/>
+            <DescriptionBlock
+                description={props.bookData.description}
+                isOpened={props.bookData.isOpened}
+                idBlocks={props.bookData.id}/>
+            <div className={s.btns__block}>
+                <button>Edit</button>
+                <button onClick={deleteOnClickHandler}>Delete</button>
+            </div>
         </div>
 
     )

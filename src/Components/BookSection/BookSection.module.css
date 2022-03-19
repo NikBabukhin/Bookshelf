@@ -7,3 +7,14 @@
     margin: 20px;
     flex-wrap:wrap;
 }
+
+.btns__block {
+    display: flex;
+    margin: 0 auto;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.btns__block button {
+    margin: 15px 5px
+}
