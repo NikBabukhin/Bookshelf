@@ -63,7 +63,7 @@ function App() {
         setBooksData(filteredBooks);
     }
 
-    const openPopupForEditCallBack=(id:string)=> {
+    const openPopupForEditCallBack = (id: string) => {
         console.log(id);
         setIsPopupOpened(true);
     }
@@ -73,12 +73,25 @@ function App() {
         setIsPopupOpened(!isPopupOpened);
     }
 
-    const onClickMainHandler=(event:any)=> {
+    const onClickMainHandler = (event: any) => {
         if (event.target.className.includes('closedPopup')) {
             setIsPopupOpened(false);
         }
     }
 
+    const saveChangesButtonHandler = (src: string, name: string, authorName: string, description: string) => {
+        let newBook = {
+            id: v1(),
+            imageSrc: src,
+            nameBook: name,
+            authorName: authorName,
+            description: description,
+            isOpened: false
+        }
+        setBooksData([newBook, ...booksData])
+    };
+
+    console.log(booksData);
 
     return (
         <div className={'App'} onClick={onClickMainHandler}>
@@ -92,9 +105,10 @@ function App() {
                 key={el.id}
                 openDescriptionCallBack={() => openDescriptionCallBack(el.id)}
                 deleteBookSection={() => deleteBookSectionCallBack(el.id)}
-                openPopupForEditCallBack={()=>openPopupForEditCallBack(el.id)}
+                openPopupForEditCallBack={() => openPopupForEditCallBack(el.id)}
             />)}
-            <Popup isPopupOpen={isPopupOpenCallBack} isOpen={isPopupOpened}/>
+            <Popup isPopupOpen={isPopupOpenCallBack} isOpen={isPopupOpened}
+                   saveChangesButton={saveChangesButtonHandler}/>
         </div>
     );
 }
