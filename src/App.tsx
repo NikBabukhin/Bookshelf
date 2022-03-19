@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {BookSection} from "./Components/BookSection/BookSection";
 import {v1} from 'uuid'
+import {Popup} from "./Components/Popup/Popup";
 
 const imgSrc = "https://images-na.ssl-images-amazon.com/images/I/41xShlnTZTL._SX376_BO1,204,203,200_.jpg";
 const descriptionBook = "Some simple text for test, not more";
@@ -59,6 +60,7 @@ function App() {
         setBooksData(filteredBooks);
     }
 
+
     return (
         <div className={'App'}>
             <h1 className={'Head'}>Welcome to the
@@ -71,7 +73,7 @@ function App() {
                 openDescriptionCallBack={() => openDescriptionCallBack(el.id)}
                 deleteBookSection={()=>deleteBookSectionCallBack(el.id)}
             />)}
-
+        <Popup/>
         </div>
     );
 }

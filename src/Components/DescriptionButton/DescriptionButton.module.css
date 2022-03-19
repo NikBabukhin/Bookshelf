@@ -30,13 +30,13 @@
     transform: rotate(270deg) scale(1, 2);
 }
 
-span {
+.button span {
     font-size: 15px;
     font-weight: bold;
     font-style: italic;
 }
 
-p {
+.button p {
     transition-duration: 0.2s;
     font-size: 15px;
     margin: 0 25px;
