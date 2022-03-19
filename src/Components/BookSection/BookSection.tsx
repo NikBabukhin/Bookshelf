@@ -9,12 +9,17 @@ type SpecialTypeForProps = {
     bookImage: string,
     openDescriptionCallBack: ()=>void
     deleteBookSection: ()=>void
+    openPopupForEditCallBack: ()=>void
 }
 
 export const BookSection = (props: SpecialTypeForProps) => {
 
     const deleteOnClickHandler =()=> {
         props.deleteBookSection();
+    }
+
+    const openPopupForEdit=()=> {
+        props.openPopupForEditCallBack();
     }
 
     return (
@@ -27,7 +32,7 @@ export const BookSection = (props: SpecialTypeForProps) => {
                 isOpened={props.bookData.isOpened}
                 idBlocks={props.bookData.id}/>
             <div className={s.btns__block}>
-                <button>Edit</button>
+                <button onClick={openPopupForEdit}>Edit</button>
                 <button onClick={deleteOnClickHandler}>Delete</button>
             </div>
         </div>

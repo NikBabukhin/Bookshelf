@@ -1,5 +1,4 @@
 import s from './Popup.module.css'
-import {useState} from "react";
 import {PopupItem} from "../PopupItem/PopupItem";
 
 export const Popup = (props: any) => {

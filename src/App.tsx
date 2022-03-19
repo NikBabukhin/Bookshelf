@@ -63,6 +63,12 @@ function App() {
         setBooksData(filteredBooks);
     }
 
+    const openPopupForEditCallBack=(id:string)=> {
+        console.log(id);
+        setIsPopupOpened(true);
+    }
+
+
     const isPopupOpenCallBack = () => {
         setIsPopupOpened(!isPopupOpened);
     }
@@ -86,6 +92,7 @@ function App() {
                 key={el.id}
                 openDescriptionCallBack={() => openDescriptionCallBack(el.id)}
                 deleteBookSection={() => deleteBookSectionCallBack(el.id)}
+                openPopupForEditCallBack={()=>openPopupForEditCallBack(el.id)}
             />)}
             <Popup isPopupOpen={isPopupOpenCallBack} isOpen={isPopupOpened}/>
         </div>
