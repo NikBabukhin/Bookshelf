@@ -1,18 +1,27 @@
 import s from "./PopupItem.module.css";
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 
-export const PopupItem=(props:any)=> {
-    let [value, setValue] = useState('')
+type PopupItemType = {
+    placeholderName: string,
+    nameInput: string,
+    inputValues: string,
+    idInput: number,
+    onChangeCallBack: (value:string, idInput:number)=> void,
+}
+
+export const PopupItem:React.FC<PopupItemType>=(props)=> {
+
+    let [currentValue, setCurrentValue] = useState(props.inputValues)
 
     const onChangeHandler=(event:ChangeEvent<HTMLInputElement>)=> {
-        setValue(event.currentTarget.value);
-        console.log(value);
+        setCurrentValue(event.currentTarget.value)
+        console.log(event.currentTarget.value, props.idInput);
     }
 
     return (
         <div className={s.popup__item}>
             <span>{props.placeholderName}</span>
-            <input className={s.popup__input} placeholder={props.nameInput} onChange={onChangeHandler}/>
+            <input className={s.popup__input} placeholder={props.nameInput} onChange={onChangeHandler} value={currentValue}/>
         </div>
     )
 }
