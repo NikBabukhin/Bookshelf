@@ -7,11 +7,11 @@ export type BookDataType = {
     authorName: string,
     description: string,
     imageSrc: string,
-    isOpened: boolean,
 }
 
 type BookInfoProps = {
-    bookData: BookDataType;
+    bookData: BookDataType,
+    isDescriptionOpen: boolean,
     openDescriptionCallBack: ()=>void
 }
 
@@ -27,7 +27,7 @@ export const BookInfo = (props:BookInfoProps) => {
                 <span>{props.bookData.authorName}</span>
             </div>
             <div>
-                <DescriptionButton openDescription={props.openDescriptionCallBack}/>
+                <DescriptionButton openDescription={props.openDescriptionCallBack} isOpened={props.isDescriptionOpen}/>
             </div>
         </div>
     )
