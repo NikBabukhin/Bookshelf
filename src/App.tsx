@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {BookSection} from "./Components/BookSection/BookSection";
 import {Popup} from "./Components/Popup/Popup";
+import {v1} from "uuid";
 
 
 type BookDataType = {
@@ -67,6 +68,7 @@ export const App: React.FC<AppPropsType> = (props) => {
         if (idInitiator) {
             openPopupForEditCallBack(idInitiator)
         } else {
+
             setValuesInput(emptyValues)
             setIsPopupOpened(true);
         }
@@ -91,20 +93,31 @@ export const App: React.FC<AppPropsType> = (props) => {
         }else if(idInput===4) {
             valueInput.description = value
         }
-        console.log(valueInput);
     }
 
-    const saveChanges = (id: string) => {
-        filteredBooks.map(bookEl => {
-            if (bookEl.id === id) {
-                bookEl.imageSrc = valueInput.imageSrc;
-                bookEl.nameBook = valueInput.nameBook;
-                bookEl.authorName = valueInput.authorName;
-                bookEl.description = valueInput.description;
-                console.log(valueInput.nameBook);
-                setBooksData([...filteredBooks]);
+    const saveChanges = (id: string, buttonName: 'Add' | 'Save Changes') => {
+        if (buttonName==='Save Changes') {
+            filteredBooks.map(bookEl => {
+                if (bookEl.id === id) {
+                    bookEl.imageSrc = valueInput.imageSrc;
+                    bookEl.nameBook = valueInput.nameBook;
+                    bookEl.authorName = valueInput.authorName;
+                    bookEl.description = valueInput.description;
+                    console.log(valueInput.nameBook);
+                    setBooksData([...filteredBooks]);
+                }
+            })
+        } else {
+            const newBook = {
+                id: v1(),
+                imageSrc: valueInput.imageSrc,
+                nameBook: valueInput.nameBook,
+                authorName: valueInput.authorName,
+                description: valueInput.description,
             }
-        })
+            setBooksData([newBook, ...filteredBooks])
+        }
+
         setValuesInput(emptyValues);
         setIsPopupOpened(false);
     }

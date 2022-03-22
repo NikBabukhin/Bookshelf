@@ -7,7 +7,7 @@ export const Popup = (props: any) => {
         props.closePopup();
     }
     const onClickHandlerSaveButton = () => {
-        props.saveChangesButton(props.idInitiator);
+        props.saveChangesButton(props.idInitiator, props.buttonName);
     }
     const onChangeCallBack=(idInput:number, value:string)=> {
         props.inputsValueReader(idInput, value)
@@ -46,7 +46,8 @@ export const Popup = (props: any) => {
                     inputValues={props.inputValues.description}
                     onChangeCallBack={onChangeCallBack}
                 />
-                <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>
+                { props.buttonName==='Save Changes'? <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>: false}
+                { props.buttonName==='Add'? <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>: false}
                 <button onClick={onClickHandler}>Cancel</button>
             </div>
         </div>
