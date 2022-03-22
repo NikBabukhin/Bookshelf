@@ -6,7 +6,7 @@ type PopupItemType = {
     nameInput: string,
     inputValues: string,
     idInput: number,
-    onChangeCallBack: (value:string, idInput:number)=> void,
+    onChangeCallBack: (idInput:number, value:string)=>void
 }
 
 export const PopupItem:React.FC<PopupItemType>=(props)=> {
@@ -15,7 +15,7 @@ export const PopupItem:React.FC<PopupItemType>=(props)=> {
 
     const onChangeHandler=(event:ChangeEvent<HTMLInputElement>)=> {
         setCurrentValue(event.currentTarget.value)
-        console.log(event.currentTarget.value, props.idInput);
+        props.onChangeCallBack(props.idInput, event.currentTarget.value)
     }
 
     return (

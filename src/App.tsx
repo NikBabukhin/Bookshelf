@@ -23,17 +23,20 @@ type AppPropsType = {
 
 export const App: React.FC<AppPropsType> = (props) => {
 
-    const [isPopupOpened, setIsPopupOpened] = useState(false);
-    const [bookData, setBooksData] = useState(props.state.bookData);
-    const [buttonPopupName, setButtonPopupName] = useState<'Add' | 'Save Changes'>('Add');
-    const [valueInput, setValuesInput] = useState({
+    const emptyValues = {
         imageSrc: '',
         nameBook: '',
         authorName: '',
         description: '',
-    })
+    };
+    const [idForPopup, setIdForPopup] = useState('')
+    const [isPopupOpened, setIsPopupOpened] = useState(false);
+    const [bookData, setBooksData] = useState(props.state.bookData);
+    const [buttonPopupName, setButtonPopupName] = useState<'Add' | 'Save Changes'>('Add');
+    const [valueInput, setValuesInput] = useState(emptyValues)
+
     let filteredBooks = bookData;
-    console.log(valueInput,'valueInput');
+
     const deleteBookSectionCallBack = (id: string) => {
         filteredBooks = bookData.filter(element => element.id !== id);
         setBooksData(filteredBooks);
@@ -41,9 +44,10 @@ export const App: React.FC<AppPropsType> = (props) => {
 
     const closePopup = () => {
         setIsPopupOpened(false);
+        setValuesInput({...emptyValues})
     }
 
-    const openPopupForEditCallBack = (idInitiator: string) => {
+    const openPopupForEditCallBack = (idInitiator: string | null) => {
         filteredBooks.map(bookEl => {
             if (bookEl.id === idInitiator) {
                 setValuesInput(() => ({
@@ -58,34 +62,14 @@ export const App: React.FC<AppPropsType> = (props) => {
         setIsPopupOpened(true);
     }
 
-// useEffect(()=>{
-//     const openPopupForEditCallBack1 = (idInitiator: string) => {
-//         filteredBooks.map(bookEl => {
-//         if (bookEl.id === idInitiator) {
-//             setValuesInput({
-//                 imageSrc: bookEl.imageSrc,
-//                 nameBook: bookEl.nameBook,
-//                 authorName: bookEl.authorName,
-//                 description: bookEl.description,
-//             })
-//         }
-//     },[])
-//     setIsPopupOpened(true);
-// },[])
-
     const popupOpenCallBack = (buttonName: 'Add' | 'Save Changes', idInitiator: string) => {
-        if (idInitiator !== '0') {
-          openPopupForEditCallBack(idInitiator)
+        setIdForPopup(idInitiator);
+        if (idInitiator) {
+            openPopupForEditCallBack(idInitiator)
         } else {
-            setValuesInput({
-                imageSrc: '',
-                nameBook: '',
-                authorName: '',
-                description: '',
-            })
+            setValuesInput(emptyValues)
             setIsPopupOpened(true);
         }
-        console.log(idInitiator);
         setButtonPopupName(buttonName);
         setIsPopupOpened(!isPopupOpened);
     }
@@ -93,19 +77,46 @@ export const App: React.FC<AppPropsType> = (props) => {
     const onClickMainHandler = (event: any) => {
         if (event.target.className.includes('closedPopup')) {
             setIsPopupOpened(false);
+            setValuesInput(emptyValues);
         }
     }
 
+    const inputsValueReader=(idInput:number, value:string)=> {
+        if (idInput===1) {
+            valueInput.imageSrc=value
+        } else if(idInput===2) {
+            valueInput.nameBook=value
+        } else if(idInput===3){
+            valueInput.authorName=value
+        }else if(idInput===4) {
+            valueInput.description = value
+        }
+        console.log(valueInput);
+    }
+
     const saveChanges = (id: string) => {
+        filteredBooks.map(bookEl => {
+            if (bookEl.id === id) {
+                bookEl.imageSrc = valueInput.imageSrc;
+                bookEl.nameBook = valueInput.nameBook;
+                bookEl.authorName = valueInput.authorName;
+                bookEl.description = valueInput.description;
+                console.log(valueInput.nameBook);
+                setBooksData([...filteredBooks]);
+            }
+        })
+        setValuesInput(emptyValues);
         setIsPopupOpened(false);
     }
+
+    console.log(valueInput);
 
     return (
         <div className={'App'} onClick={onClickMainHandler}>
             <h1 className={'Head'}>Welcome to the
                 <span className={'Head__span'}> bookshelf</span>
             </h1>
-            <button onClick={() => popupOpenCallBack('Add', '0')}>Add new book</button>
+            <button onClick={() => popupOpenCallBack('Add', '')}>Add new book</button>
             {filteredBooks.map(el => <BookSection
                 bookData={el}
                 bookImage={el.imageSrc}
@@ -114,19 +125,15 @@ export const App: React.FC<AppPropsType> = (props) => {
                 openPopupForEditCallBack={() => popupOpenCallBack('Save Changes', el.id)}
             />)}
             {isPopupOpened && <Popup buttonName={buttonPopupName}
-                                           inputValues={valueInput}
-                                           isOpen={isPopupOpened}
-                                           saveChangesButton={saveChanges}
-                                           closePopup={closePopup}
+                                     inputsValueReader={inputsValueReader}
+                                     inputValues={valueInput}
+                                     isOpen={isPopupOpened}
+                                     saveChangesButton={saveChanges}
+                                     closePopup={closePopup}
+                                     idInitiator={idForPopup}
+
             />}
         </div>
     );
 }
 
-/*let currentValues = {
-    imageSrc: bookEl.imageSrc,
-    nameBook: bookEl.nameBook,
-    authorName: bookEl.authorName,
-    description: bookEl.description
-}*/
-/*Сделать модальное окно для добавления новых книг*/

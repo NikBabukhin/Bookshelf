@@ -1,6 +1,5 @@
 import s from './Popup.module.css'
 import {PopupItem} from "../PopupItem/PopupItem";
-import {useState} from "react";
 
 export const Popup = (props: any) => {
 
@@ -8,10 +7,10 @@ export const Popup = (props: any) => {
         props.closePopup();
     }
     const onClickHandlerSaveButton = () => {
-        props.saveChangesButton(props.inputValues.imageSrc, props.inputValues.nameBook, props.inputValues.authorName, props.inputValues.description)
+        props.saveChangesButton(props.idInitiator);
     }
-    const onChangeInputCallBack = (value: string, idInput: number) => {
-        console.log(value, idInput);
+    const onChangeCallBack=(idInput:number, value:string)=> {
+        props.inputsValueReader(idInput, value)
     }
 
     return (
@@ -24,26 +23,29 @@ export const Popup = (props: any) => {
                     nameInput={'Enter image book URL...'}
                     placeholderName={'Image URL:'}
                     inputValues={props.inputValues.imageSrc}
-                    onChangeCallBack={onChangeInputCallBack}
+                    onChangeCallBack={onChangeCallBack}
                 />
                 <PopupItem
                     idInput={2}
                     nameInput={'Enter name book...'}
                     placeholderName={'Book Name:'}
                     inputValues={props.inputValues.nameBook}
-                    onChangeCallBack={onChangeInputCallBack}/>
+                    onChangeCallBack={onChangeCallBack}
+                />
                 <PopupItem
                     idInput={3}
                     nameInput={"Enter author's book name..."}
                     placeholderName={'Author name:'}
                     inputValues={props.inputValues.authorName}
-                    onChangeCallBack={onChangeInputCallBack}/>
+                    onChangeCallBack={onChangeCallBack}
+                />
                 <PopupItem
                     idInput={4}
                     nameInput={'Enter description of book...'}
                     placeholderName={'Description:'}
                     inputValues={props.inputValues.description}
-                    onChangeCallBack={onChangeInputCallBack}/>
+                    onChangeCallBack={onChangeCallBack}
+                />
                 <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>
                 <button onClick={onClickHandler}>Cancel</button>
             </div>
