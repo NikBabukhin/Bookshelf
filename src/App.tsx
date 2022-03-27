@@ -21,7 +21,6 @@ type AppPropsType = {
     state: AppStateType,
 }
 
-
 export const App: React.FC<AppPropsType> = (props) => {
 
     const emptyValues = {
