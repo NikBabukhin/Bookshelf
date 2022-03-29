@@ -5,8 +5,7 @@ export type BookDataType = {
     id: string,
     nameBook: string,
     authorName: string,
-    description: string,
-    imageSrc: string,
+    yearOfIssue: number,
 }
 
 type BookInfoProps = {

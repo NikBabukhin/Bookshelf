@@ -10,7 +10,7 @@ type BookDataType = {
     imageSrc: string,
     nameBook: string,
     authorName: string,
-    description: string,
+    yearOfIssue: number,
 }
 
 type AppStateType = {
@@ -27,7 +27,7 @@ export const App: React.FC<AppPropsType> = (props) => {
         imageSrc: '',
         nameBook: '',
         authorName: '',
-        description: '',
+        yearOfIssue: 0,
     };
     const [idForPopup, setIdForPopup] = useState('')
     const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -54,7 +54,7 @@ export const App: React.FC<AppPropsType> = (props) => {
                     imageSrc: bookEl.imageSrc,
                     nameBook: bookEl.nameBook,
                     authorName: bookEl.authorName,
-                    description: bookEl.description,
+                    yearOfIssue: bookEl.yearOfIssue,
                 }))
             }
         })
@@ -82,26 +82,26 @@ export const App: React.FC<AppPropsType> = (props) => {
         }
     }
 
-    const inputsValueReader=(idInput:number, value:string)=> {
-        if (idInput===1) {
-            valueInput.imageSrc=value
-        } else if(idInput===2) {
-            valueInput.nameBook=value
-        } else if(idInput===3){
-            valueInput.authorName=value
-        }else if(idInput===4) {
-            valueInput.description = value
+    const inputsValueReader = (idInput: number, value: string | number) => {
+        if (idInput === 1) {
+            valueInput.imageSrc = (typeof value === "string" ? value : value.toString())
+        } else if (idInput === 2) {
+            valueInput.nameBook = (typeof value === "string" ? value : value.toString())
+        } else if (idInput === 3) {
+            valueInput.authorName = (typeof value === "string" ? value : value.toString())
+        } else if (idInput === 4) {
+            valueInput.yearOfIssue = (typeof value === "number" ? value : +value)
         }
     }
 
     const saveChanges = (id: string, buttonName: 'Add' | 'Save Changes') => {
-        if (buttonName==='Save Changes') {
+        if (buttonName === 'Save Changes') {
             filteredBooks.map(bookEl => {
                 if (bookEl.id === id) {
                     bookEl.imageSrc = valueInput.imageSrc;
                     bookEl.nameBook = valueInput.nameBook;
                     bookEl.authorName = valueInput.authorName;
-                    bookEl.description = valueInput.description;
+                    bookEl.yearOfIssue = valueInput.yearOfIssue;
                     console.log(valueInput.nameBook);
                     setBooksData([...filteredBooks]);
                 }
@@ -112,7 +112,7 @@ export const App: React.FC<AppPropsType> = (props) => {
                 imageSrc: valueInput.imageSrc,
                 nameBook: valueInput.nameBook,
                 authorName: valueInput.authorName,
-                description: valueInput.description,
+                yearOfIssue: valueInput.yearOfIssue,
             }
             setBooksData([newBook, ...filteredBooks])
         }
