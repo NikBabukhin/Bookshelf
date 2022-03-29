@@ -10,7 +10,7 @@ type BookDataType = {
     imageSrc: string,
     nameBook: string,
     authorName: string,
-    yearOfIssue: number,
+    yearOfIssue: string,
 }
 
 type AppStateType = {
@@ -22,12 +22,13 @@ type AppPropsType = {
 }
 
 export const App: React.FC<AppPropsType> = (props) => {
+    const currentMaxYear=2019;
 
     const emptyValues = {
         imageSrc: '',
         nameBook: '',
         authorName: '',
-        yearOfIssue: 0,
+        yearOfIssue: '',
     };
     const [idForPopup, setIdForPopup] = useState('')
     const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -82,15 +83,15 @@ export const App: React.FC<AppPropsType> = (props) => {
         }
     }
 
-    const inputsValueReader = (idInput: number, value: string | number) => {
+    const inputsValueReader = (idInput: number, value: string) => {
         if (idInput === 1) {
-            valueInput.imageSrc = (typeof value === "string" ? value : value.toString())
+            valueInput.imageSrc = value;
         } else if (idInput === 2) {
-            valueInput.nameBook = (typeof value === "string" ? value : value.toString())
+            valueInput.nameBook = value;
         } else if (idInput === 3) {
-            valueInput.authorName = (typeof value === "string" ? value : value.toString())
+            valueInput.authorName = value;
         } else if (idInput === 4) {
-            valueInput.yearOfIssue = (typeof value === "number" ? value : +value)
+            valueInput.yearOfIssue = value;
         }
     }
 
@@ -102,7 +103,6 @@ export const App: React.FC<AppPropsType> = (props) => {
                     bookEl.nameBook = valueInput.nameBook;
                     bookEl.authorName = valueInput.authorName;
                     bookEl.yearOfIssue = valueInput.yearOfIssue;
-                    console.log(valueInput.nameBook);
                     setBooksData([...filteredBooks]);
                 }
             })
@@ -121,7 +121,6 @@ export const App: React.FC<AppPropsType> = (props) => {
         setIsPopupOpened(false);
     }
 
-    console.log(valueInput);
 
     return (
         <div className={'App'} onClick={onClickMainHandler}>
@@ -143,7 +142,7 @@ export const App: React.FC<AppPropsType> = (props) => {
                                      saveChangesButton={saveChanges}
                                      closePopup={closePopup}
                                      idInitiator={idForPopup}
-
+                                     maxYear={currentMaxYear}
             />}
         </div>
     );

@@ -1,17 +1,23 @@
 import s from './Popup.module.css'
 import {PopupItem} from "../PopupItem/PopupItem";
 
+
 export const Popup = (props: any) => {
 
     const onClickHandler = () => {
         props.closePopup();
     }
+
     const onClickHandlerSaveButton = () => {
         props.saveChangesButton(props.idInitiator, props.buttonName);
     }
-    const onChangeCallBack=(idInput:number, value:string)=> {
-        props.inputsValueReader(idInput, value)
+
+    const onChangeCallBack = (idInput: number, value: string) => {
+        if (value) {
+            props.inputsValueReader(idInput, value)
+        }
     }
+
 
     return (
         <div className={`${s.popup} ${props.isOpen ? s.open : ""} closedPopup`}>
@@ -42,13 +48,12 @@ export const Popup = (props: any) => {
                 <PopupItem
                     type={'number'}
                     idInput={4}
-                    nameInput={'Enter description of book...'}
+                    nameInput={'Enter year of issue book...'}
                     placeholderName={'Year of issue'}
                     inputValues={props.inputValues.yearOfIssue}
                     onChangeCallBack={onChangeCallBack}
                 />
-                { props.buttonName==='Save Changes'? <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>: false}
-                { props.buttonName==='Add'? <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>: false}
+                <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>
                 <button onClick={onClickHandler}>Cancel</button>
             </div>
         </div>

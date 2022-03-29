@@ -10,9 +10,27 @@
 }
 
 .popup__input {
+    border-radius: 5px;
     width: 60%;
     font-size: 15px;
-    padding: 5px 0;
+    padding: 5px;
+    border: 1px solid black;
+    outline: none;
+}
+
+.popup__input:focus {
+    padding: 4px;
+    border: 2px solid black;
+}
+
+.error {
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.error:focus {
+    border: 2px solid red;
+    padding: 4px;
 }
 
 .popup__input::placeholder {

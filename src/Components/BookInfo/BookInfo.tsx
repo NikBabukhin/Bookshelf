@@ -4,7 +4,7 @@ export type BookDataType = {
     id: string,
     nameBook: string,
     authorName: string,
-    yearOfIssue: number,
+    yearOfIssue: number|string,
 }
 
 type BookInfoProps = {
