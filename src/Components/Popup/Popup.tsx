@@ -40,10 +40,11 @@ export const Popup = (props: any) => {
                     onChangeCallBack={onChangeCallBack}
                 />
                 <PopupItem
+                    type={'number'}
                     idInput={4}
                     nameInput={'Enter description of book...'}
-                    placeholderName={'Description:'}
-                    inputValues={props.inputValues.description}
+                    placeholderName={'Year of issue'}
+                    inputValues={props.inputValues.yearOfIssue}
                     onChangeCallBack={onChangeCallBack}
                 />
                 { props.buttonName==='Save Changes'? <button onClick={onClickHandlerSaveButton}>{props.buttonName}</button>: false}

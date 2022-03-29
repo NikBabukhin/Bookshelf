@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import s from './BookSection.module.css'
 import {BookDataType, BookInfo} from "../BookInfo/BookInfo";
 import {BookImg} from "../BookImg/BookImg";
-import {DescriptionBlock} from "../DescriptionBlock/DescriptionBlock";
+
 
 type SpecialTypeForProps = {
     bookData: BookDataType,
@@ -13,8 +13,6 @@ type SpecialTypeForProps = {
 
 export const BookSection = (props: SpecialTypeForProps) => {
 
-    let [activeIsOpened, setActiveIsOpened] = useState(false);
-
     const onClickDeleteHandler =()=> {
         props.deleteBookSection();
     }
@@ -23,21 +21,11 @@ export const BookSection = (props: SpecialTypeForProps) => {
         props.openPopupForEditCallBack();
     }
 
-    const openDescriptionHandler=()=> {
-        setActiveIsOpened(!activeIsOpened);
-    }
 
     return (
         <div className={s.book__section}>
             <BookImg imageSrc={props.bookImage}/>
-            <BookInfo bookData={props.bookData}
-                      openDescriptionCallBack={openDescriptionHandler}
-                      isDescriptionOpen = {activeIsOpened}
-            />
-            <DescriptionBlock
-                description={props.bookData.description}
-                isOpened={activeIsOpened}
-                idBlocks={props.bookData.id}/>
+            <BookInfo bookData={props.bookData}/>
             <div className={s.btns__block}>
                 <button onClick={openPopupForEdit}>Edit</button>
                 <button onClick={onClickDeleteHandler}>Delete</button>

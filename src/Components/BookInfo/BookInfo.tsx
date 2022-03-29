@@ -1,5 +1,4 @@
 import s from "./BookInfo.module.css"
-import {DescriptionButton} from "../DescriptionButton/DescriptionButton";
 
 export type BookDataType = {
     id: string,
@@ -10,11 +9,9 @@ export type BookDataType = {
 
 type BookInfoProps = {
     bookData: BookDataType,
-    isDescriptionOpen: boolean,
-    openDescriptionCallBack: ()=>void
 }
 
-export const BookInfo = (props:BookInfoProps) => {
+export const BookInfo = (props: BookInfoProps) => {
     return (
         <div className={s.info__wrapper}>
             <div>
@@ -26,7 +23,8 @@ export const BookInfo = (props:BookInfoProps) => {
                 <span>{props.bookData.authorName}</span>
             </div>
             <div>
-                <DescriptionButton openDescription={props.openDescriptionCallBack} isOpened={props.isDescriptionOpen}/>
+                <h3>Year of issue:</h3>
+                <span>{props.bookData.yearOfIssue}</span>
             </div>
         </div>
     )
